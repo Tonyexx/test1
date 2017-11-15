@@ -1,0 +1,37 @@
+// exercise_7.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+	using namespace std;
+	inline void keep_window_open() { char ch; cin >> ch; }
+
+	int square(int x) 
+	{
+		int y = 0;
+		for (int i = 1; i <= x; i++)
+			y +=x;
+		return y;
+	}
+
+
+	int main()
+	{		
+		//char let = 'a';  //let means letter
+		//int num = 97;
+		//while (let <= 'z')
+		//{
+		//	cout << let << "\t" << num<<"\n";
+		//	++let;
+		//	++num;
+		//}
+		int a = 0;
+		a = square(5);
+		cout << a;
+		keep_window_open();
+	}
