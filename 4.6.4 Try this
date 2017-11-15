@@ -1,0 +1,57 @@
+// exercise_7.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+	using namespace std;
+	inline void keep_window_open() { char ch; cin >> ch; }
+
+	template<typename C>
+	using Value_type = typename C::value_type;
+
+	template<typename C>
+	using Iterator = typename C::iterator;
+
+	template<typename C>
+	// requires Container<C>()
+
+	void sort(C& c)
+	{
+		std::sort(c.begin(), c.end());
+	}
+
+	template<typename C, typename Pred>
+	// requires Container<C>() && Binary_Predicate<Value_type<C>>()
+	void sort(C& c, Pred p)
+	{
+		std::sort(c.begin(), c.end(), p);
+	}
+
+	int main()
+	{			
+		cout << "Please enter the words you like: \n";
+		string disliked = "hate";
+		vector<string>words;
+		for (string temp; cin >> temp;) //input the whitespace-separated words
+			words.push_back(temp);      //put the words into vector
+		sort(words);					//sort the words
+		for (int i = 0; i < words.size(); ++i) 
+		{
+			if (i == 0 || (words[i - 1] != words[i]))		// only print the new words
+			{
+				cout << words[i] << "\n";
+				
+			}
+			else if(words[i]==disliked)
+			{
+				cout << "BLEEP\n";
+				
+			}
+		}		
+	
+	}
