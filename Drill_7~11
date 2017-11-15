@@ -1,0 +1,197 @@
+// exercise_7.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+	using namespace std;
+	inline void keep_window_open() { char ch; cin >> ch; }
+
+	template<typename C>
+	using Value_type = typename C::value_type;
+
+	template<typename C>
+	using Iterator = typename C::iterator;
+
+	template<typename C>
+	// requires Container<C>()
+
+	void sort(C& c)
+	{
+		std::sort(c.begin(), c.end());
+	}
+
+	template<typename C, typename Pred>
+	// requires Container<C>() && Binary_Predicate<Value_type<C>>()
+	void sort(C& c, Pred p)
+	{
+		std::sort(c.begin(), c.end(), p);
+	}
+
+	int main()
+	{			
+		cout << "Please enter two numbers you like: \n";
+		vector<double>len;
+		double prenum,num,num_max,num_min=0;
+		string unit = " ";
+		double sum = 0;
+		int count = 0;
+		cin >> prenum >> unit;			//输入第一个数
+
+		//converting the unit into meter
+		if (unit == "cm") 
+		{
+			prenum /= 100;
+			num_max = prenum;		//以第一个数为基准
+			num_min = prenum;
+			len.push_back(prenum);
+		}
+		else if (unit == "in")
+		{
+			prenum = prenum*2.54 / 100;
+			num_max = prenum;		//以第一个数为基准
+			num_min = prenum;
+			len.push_back(prenum);
+		}
+		else if (unit == "ft") 
+		{
+			prenum = prenum * 12 * 2.54 / 100;
+			num_max = prenum;		//以第一个数为基准
+			num_min = prenum;
+			len.push_back(prenum);
+		}
+		else if (unit == "m")
+		{
+			num_max = prenum ;		//以第一个数为基准
+			num_min = prenum ;
+			len.push_back(prenum);
+		}
+		
+		while (cin >> num >> unit)	/*输入后续*/
+		{			
+			if (unit == "cm")
+			{
+			    num =num/100;		
+				sum += num;
+				++count;
+				len.push_back(num);
+
+				// 判断最大最小，并和sum一起输出到屏幕上
+				if (num > num_max)
+				{
+					cout << num * 100 << "cm the largest so far\n"
+						 << num_min<<"m the smallest so far\n"
+						 << sum << "m the sum\n";
+					num_max = num;
+				}
+				else if (num < num_min)
+				{
+					cout << num * 100 << "cm the smallest so far\n"
+						 << num_max << "m the largest so far\n"
+						 << sum << "m the sum\n";
+					num_min = num;
+				}
+				else
+					cout << num_min << "m the smallest so far\n"
+					     << num_max << "m the largest so far\n"
+					     << sum<< "m the sum\n";
+			}
+			else if (unit == "in")
+			{
+				num = num*2.54 / 100;
+				sum += num;
+				++count;
+				len.push_back(num);
+
+				// 判断最大最小，并和sum一起输出到屏幕上
+				if (num > num_max)
+				{
+					cout << num/2.54 * 100 << "in the largest so far\n"
+						 << num_min << "m the smallest so far\n"
+						 << sum << "m the sum\n";
+					num_max = num;
+				}
+				else if (num < num_min)
+				{
+					cout << num / 2.54 * 100 << "in the smallest so far\n"
+						 << num_max << "m the largest so far\n"
+						 << sum << "m the sum\n";
+					num_min = num;
+				}
+				else
+					cout << num_min << "m the smallest so far\n"
+					     << num_max << "m the largest so far\n"
+					     << sum << "m the sum\n";
+			}
+		    else if (unit == "ft")
+			{
+				num = num * 12 * 2.54 / 100;
+				sum += num;
+				++count;
+				len.push_back(num);
+
+				// 判断最大最小，并和sum一起输出到屏幕上
+				if (num > num_max)
+				{
+					cout << num / 12 / 2.54 *100 << "ft the largest so far\n"
+						 << num_min << "m the smallest so far\n"
+						 << sum << "m the sum\n";
+					num_max = num;
+				}
+				else if (num < num_min)
+				{
+					cout << num / 12 / 2.54 * 100 << "ft the smallest so far\n"
+						 << num_max << "m the largest so far\n"
+					     << sum << "m the sum\n";
+					num_min = num;
+				}
+				else
+					cout << num_min << "m the smallest so far\n"
+					     << num_max << "m the largest so far\n"
+					     << sum << "m the sum\n";
+			}
+			else if (unit == "m")
+			{
+				sum += num;
+				++count;
+				len.push_back(num);
+
+				// 判断最大最小，并和sum一起输出到屏幕上
+				if (num > num_max)
+				{
+					cout << num << "m the largest so far\n"
+						 << num_min << "m the smallest so far\n"
+						 << sum << "m the sum\n";
+					num_max = num;
+				}
+				else if (num < num_min)
+				{
+					cout << num << "m the smallest so far\n"
+						 << num_max << "m the largest so far\n"
+						 << sum << "m the sum\n";
+					num_min = num;
+				}
+				else
+					cout << num_min << "m the smallest so far\n"
+					     << num_max << "m the largest so far\n"
+					     << sum << "m the sum\n";
+			}
+			
+			//如果输入单位有误
+			else if (unit != "cm" | unit != "in" | unit != "ft" | unit != "m")
+			{
+				cout << "the input is illegal.\n";
+			}
+		}
+		sort(len);
+		for (int i = 0; i < size(len); ++i)
+			cout << len[i] << " ";	
+		system("pause");
+	}
+
+
+
