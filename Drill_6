@@ -1,0 +1,56 @@
+// exercise_7.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+	using namespace std;
+	inline void keep_window_open() { char ch; cin >> ch; }
+
+	template<typename C>
+	using Value_type = typename C::value_type;
+
+	template<typename C>
+	using Iterator = typename C::iterator;
+
+	template<typename C>
+	// requires Container<C>()
+
+	void sort(C& c)
+	{
+		std::sort(c.begin(), c.end());
+	}
+
+	template<typename C, typename Pred>
+	// requires Container<C>() && Binary_Predicate<Value_type<C>>()
+	void sort(C& c, Pred p)
+	{
+		std::sort(c.begin(), c.end(), p);
+	}
+
+	int main()
+	{			
+		cout << "Please enter two numbers you like: \n";
+		vector<double>nums;
+		double num,pre_num,num_max,num_min;
+		cin >> pre_num;
+		num_max = pre_num;
+		num_min = pre_num;
+		while (cin >> num)
+		{
+			if(num>num_max)
+			{
+				num_max = num;
+				cout << num << " the largest so far\n";				
+			}
+			if (num < num_min)
+			{
+				num_min = num;
+				cout << num << " the smallest so far\n";
+			}
+		}
+	}
