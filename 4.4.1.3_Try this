@@ -1,0 +1,41 @@
+// exercise_7.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include "stdafx.h"
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+	using namespace std;
+	inline void keep_window_open() { char ch; cin >> ch; }
+
+
+	int main()
+	{		
+		constexpr double yen_per_dollars = 100;
+		constexpr double euros_per_dollars = 1.1;
+		constexpr double pounds_per_dollars = 1.15;
+		constexpr double yuan_per_kroner = 1.5;
+		double money = 0;
+		char unit = ' ';
+		cout << "Please enter the money followed by a unit(y,e,p): \n";
+		cin >> money>> unit;
+		switch (unit) {
+		case'y':
+			cout << money << "￥==" << money / yen_per_dollars << "$\n"
+				<< money << "￥==" << money / yuan_per_kroner << "韩元\n";
+			break;
+		case'e':
+			cout << money << "€==" << money / euros_per_dollars << "$\n";
+			break;
+		case'p':
+			cout << money << "£==" << money / pounds_per_dollars << "$\n";
+			break;
+		default:
+			cout << "Sorry, I don't know a unit called'" << unit << "'\n";
+			break;
+		}
+		keep_window_open();
+	}
